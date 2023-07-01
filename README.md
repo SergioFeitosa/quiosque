@@ -1,2 +1,1 @@
 # quiosque
-Quiosques da praia
