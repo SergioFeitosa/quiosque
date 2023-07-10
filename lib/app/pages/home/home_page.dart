@@ -1,3 +1,4 @@
+import 'package:quiosque/app/core/dto/order_product_dto.dart';
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_appbar.dart';
 import 'package:quiosque/app/pages/categories/widgets/delivery_category_tile.dart';
@@ -5,9 +6,11 @@ import 'package:quiosque/app/pages/home/home_controller.dart';
 import 'package:quiosque/app/pages/home/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiosque/app/pages/products/widgets/shopping_bag_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final List<OrderProductDto> bag;
+  const HomePage({Key? key, required this.bag}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,6 +21,9 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
   void onReady() {
     //SharedPreferences.getInstance().then((value) => value.clear());
     controller.loadCategories();
+    if (widget.bag.isNotEmpty) {
+      controller.updateBag(widget.bag);
+    }
   }
 
   @override
@@ -31,8 +37,7 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                 loading: () => showLoader(),
                 error: () {
                   hideLoader();
-                  showError(
-                      state.errorMessage ?? 'Erro de acesso às categorias');
+                  showError(state.errorMessage ?? 'Erro de acesso ao produto');
                 });
           },
           buildWhen: (previous, current) => current.status.matchAny(
@@ -48,15 +53,18 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                     itemCount: state.categories.length,
                     itemBuilder: (context, index) {
                       final category = state.categories[index];
-                      final orders = state.shoppingBag;
 
                       return DeliveryCategoryTile(
                         category: category,
-                        orderProduct: orders.isNotEmpty ? orders.first : null,
+                        bag: widget.bag,
                       );
                     },
                   ),
                 ),
+                Visibility(
+                  visible: widget.bag.isNotEmpty,
+                  child: ShoppingBagWidget(bag: state.shoppingBag),
+                )
               ],
             );
           },

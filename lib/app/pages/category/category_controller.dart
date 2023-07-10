@@ -11,6 +11,8 @@ class CategoryController extends Cubit<CategoryState> {
   CategoryController(this._productsRepository)
       : super(const CategoryState.initial());
 
+  List<OrderProductDto>? get getBag => [...state.shoppingBag];
+
   Future<void> loadProducts() async {
     emit(state.copyWith(status: CategoryStateStatus.loading));
     try {

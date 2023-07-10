@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiosque/app/core/dto/order_product_dto.dart';
 
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
-import 'package:quiosque/app/core/ui/widgets/delivery_appbar.dart';
+
 import 'package:quiosque/app/models/category_model.dart';
 import 'package:quiosque/app/pages/category/category_controller.dart';
 import 'package:quiosque/app/pages/category/category_state.dart';
@@ -13,9 +12,8 @@ import 'package:quiosque/app/pages/products/widgets/shopping_bag_widget.dart';
 
 class CategoryPage extends StatefulWidget {
   final CategoryModel category;
-  final OrderProductDto? order;
-
-  const CategoryPage({Key? key, required this.category, required this.order})
+  final List<OrderProductDto>? bag;
+  const CategoryPage({Key? key, required this.category, required this.bag})
       : super(key: key);
 
   @override
@@ -27,12 +25,25 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
   void onReady() {
     //SharedPreferences.getInstance().then((value) => value.clear());
     controller.loadProducts();
+    //final List<OrderProductDto>? shoppingBag = controller.getBag;
+    controller.updateBag(widget.bag!);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: DeliveryAppbar(),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.yellow),
+            onPressed: () async {
+              await Navigator.of(context).pushNamed('/home', arguments: {
+                'bag': controller.getBag,
+              });
+            },
+          ),
+          title: const Text('Category Page'),
+          centerTitle: true,
+        ),
         body: BlocConsumer<CategoryController, CategoryState>(
           listener: (context, state) {
             state.status.matchAny(
@@ -65,8 +76,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
 
                       final product = products[index];
 
-                      final orders = state.shoppingBag
-                          .where((order) => order.product == product);
+                      final orders = state.shoppingBag;
+
                       return DeliveryProductTile(
                         product: product,
                         orderProduct: orders.isNotEmpty ? orders.first : null,

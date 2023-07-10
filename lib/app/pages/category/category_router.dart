@@ -9,23 +9,23 @@ class CategoryRouter {
   CategoryRouter._();
 
   static Widget get page => MultiProvider(
-        providers: [
-          Provider<ProductsRepository>(
-            create: (context) => ProductsRepositoryImpl(
-              dio: context.read(),
+          providers: [
+            Provider<ProductsRepository>(
+              create: (context) => ProductsRepositoryImpl(
+                dio: context.read(),
+              ),
             ),
-          ),
-          Provider(
-            create: (context) => CategoryController(context.read()),
-          )
-        ],
-        builder: (context, child) {
-          final args = ModalRoute.of(context)!.settings.arguments
-              as Map<String, dynamic>;
-          return CategoryPage(
-            category: args['category'],
-            order: args['order'],
-          );
-        },
-      );
+            Provider(
+              create: (context) => CategoryController(context.read()),
+            )
+          ],
+          builder: (context, child) {
+            final args = ModalRoute.of(context)!.settings.arguments
+                as Map<String, dynamic>;
+
+            return CategoryPage(
+              category: args['category'],
+              bag: args['bag'],
+            );
+          });
 }

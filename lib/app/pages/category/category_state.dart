@@ -30,8 +30,8 @@ class CategoryState extends Equatable {
   const CategoryState.initial()
       : status = CategoryStateStatus.initial,
         products = const [],
-        shoppingBag = const [],
-        errorMessage = null;
+        errorMessage = null,
+        shoppingBag = const [];
 
   @override
   List<Object?> get props => [status, products, errorMessage, shoppingBag];

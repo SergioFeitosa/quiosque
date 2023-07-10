@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiosque/app/pages/category/category_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ShoppingBagWidget extends StatelessWidget {
+class ShoppingBagHomeWidget extends StatelessWidget {
   final List<OrderProductDto> bag;
-  const ShoppingBagWidget({super.key, required this.bag});
+  const ShoppingBagHomeWidget({super.key, required this.bag});
 
   Future<void> _goOrder(BuildContext context) async {
     final navigator = Navigator.of(context);

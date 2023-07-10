@@ -19,6 +19,13 @@ class HomeRouter {
             create: (context) => HomeController(context.read()),
           )
         ],
-        child: const HomePage(),
+        builder: (context, child) {
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>;
+
+          return HomePage(
+            bag: args['bag'],
+          );
+        },
       );
 }
