@@ -53,7 +53,6 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                     itemCount: state.categories.length,
                     itemBuilder: (context, index) {
                       final category = state.categories[index];
-
                       return DeliveryCategoryTile(
                         category: category,
                         bag: widget.bag,

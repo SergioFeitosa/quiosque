@@ -60,7 +60,7 @@ class _ProductDetailPageState
               child: Text(
                 'Confirmar',
                 style: context.textStyles.textExtraBold
-                    .copyWith(color: Colors.green),
+                    .copyWith(color: Colors.grey),
               ),
             ),
           ],

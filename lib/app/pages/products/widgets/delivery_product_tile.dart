@@ -66,6 +66,10 @@ class DeliveryProductTile extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Divider(
+                    color: Colors.black38,
+                    thickness: 2,
+                  ),
                 ],
               ),
             ),

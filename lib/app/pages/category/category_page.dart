@@ -33,6 +33,7 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () async {

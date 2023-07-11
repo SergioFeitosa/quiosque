@@ -63,7 +63,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
               child: Text(
                 'Confirmar',
                 style: context.textStyles.textExtraBold
-                    .copyWith(color: Colors.green),
+                    .copyWith(color: Colors.grey),
               ),
             ),
           ],

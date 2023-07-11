@@ -13,7 +13,7 @@ class ColorsApp {
     return _instance!;
   }
 
-  Color get primary => const Color(0XFF007D21);
+  Color get primary => const Color.fromARGB(255, 125, 126, 125);
   //Color get primary => const Color.fromARGB(0, 2, 154, 214);
   Color get secondary => const Color(0XFFF88B0C);
 }
