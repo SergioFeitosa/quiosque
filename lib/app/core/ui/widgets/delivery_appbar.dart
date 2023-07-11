@@ -5,7 +5,8 @@ class DeliveryAppbar extends AppBar {
     super.key,
     double elevation = 1,
   }) : super(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
+          iconTheme: const IconThemeData(color: Colors.white),
           elevation: elevation,
           title: Image.asset(
             'assets/images/chapeudecouro02.png',

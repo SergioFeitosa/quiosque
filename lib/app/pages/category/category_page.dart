@@ -34,14 +34,28 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.yellow),
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () async {
               await Navigator.of(context).pushNamed('/home', arguments: {
                 'bag': controller.getBag,
               });
             },
           ),
-          title: const Text('Category Page'),
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () async {
+                await Navigator.of(context).pushNamed('/home', arguments: {
+                  'bag': controller.getBag,
+                });
+              },
+              child: Image.asset(
+                "assets/images/chapeudecouro02.png",
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           centerTitle: true,
         ),
         body: BlocConsumer<CategoryController, CategoryState>(

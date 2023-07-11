@@ -6,7 +6,7 @@ import 'package:quiosque/app/pages/home/home_controller.dart';
 import 'package:quiosque/app/pages/home/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiosque/app/pages/products/widgets/shopping_bag_widget.dart';
+import 'package:quiosque/app/pages/products/widgets/shopping_bag_home_widget.dart';
 
 class HomePage extends StatefulWidget {
   final List<OrderProductDto> bag;
@@ -63,7 +63,7 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                 ),
                 Visibility(
                   visible: widget.bag.isNotEmpty,
-                  child: ShoppingBagWidget(bag: state.shoppingBag),
+                  child: ShoppingBagHomeWidget(bag: state.shoppingBag),
                 )
               ],
             );
