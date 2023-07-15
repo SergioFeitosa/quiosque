@@ -50,7 +50,8 @@ class PaymentTypesField extends StatelessWidget {
                           ),
                           Text(
                             state.selected.title ?? 'Selecione:',
-                            style: context.textStyles.textRegular,
+                            style: context.textStyles.textRegular
+                                .copyWith(color: const Color(0xff0000EE)),
                           ),
                           //const Icon(Icons.arrow_forward_ios_rounded)
                         ],
