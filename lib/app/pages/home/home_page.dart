@@ -9,8 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiosque/app/pages/products/widgets/shopping_bag_home_widget.dart';
 
 class HomePage extends StatefulWidget {
+  final String estabelecimento;
+  final String local;
   final List<OrderProductDto> bag;
-  const HomePage({Key? key, required this.bag}) : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.bag,
+    required this.estabelecimento,
+    required this.local,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -19,6 +19,15 @@ class OrderRouter {
             create: (context) => OrderController(context.read()),
           ),
         ],
-        child: const OrderPage(),
+        builder: (context, child) {
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>;
+
+          return OrderPage(
+            estabelecimento: args['estabelecimento'],
+            local: args['local'],
+            bag: args['bag'],
+          );
+        },
       );
 }

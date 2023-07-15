@@ -52,7 +52,7 @@ dependencies:
   validatorless: ^1.2.3
   flutter_awesome_select: ^6.5.0
   flutter_secure_storage: ^8.0.0
-  
+  qr_code_scanner: ^1.0.1
 
 
 dev_dependencies:

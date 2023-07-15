@@ -20,14 +20,10 @@ class PaymentTypesField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Formas de Pagamento',
-            style: context.textStyles.textRegular.copyWith(fontSize: 16),
-          ),
           SmartSelect.single(
             title: '',
             selectedValue: valueSelected,
@@ -42,16 +38,21 @@ class PaymentTypesField extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.only(right: 10),
                       width: context.screenWidth,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            state.selected.title ?? '',
+                            'Formas de Pagamento:',
+                            style: context.textStyles.textRegular
+                                .copyWith(fontSize: 16),
+                          ),
+                          Text(
+                            state.selected.title ?? 'Selecione:',
                             style: context.textStyles.textRegular,
                           ),
-                          const Icon(Icons.arrow_forward_ios_rounded)
+                          //const Icon(Icons.arrow_forward_ios_rounded)
                         ],
                       ),
                     ),

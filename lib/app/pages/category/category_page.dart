@@ -39,6 +39,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
             onPressed: () async {
               await Navigator.of(context).pushNamed('/home', arguments: {
                 'bag': controller.getBag,
+                'estabelecimento': '001',
+                'local': 'gs001',
               });
             },
           ),
@@ -48,6 +50,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
               onTap: () async {
                 await Navigator.of(context).pushNamed('/home', arguments: {
                   'bag': controller.getBag,
+                  'estabelecimento': '001',
+                  'local': 'gs001',
                 });
               },
               child: Image.asset(
@@ -102,7 +106,11 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
                 ),
                 Visibility(
                   visible: state.shoppingBag.isNotEmpty,
-                  child: ShoppingBagWidget(bag: state.shoppingBag),
+                  child: ShoppingBagWidget(
+                    bag: state.shoppingBag,
+                    estabelecimento: '001',
+                    local: 'gs001',
+                  ),
                 )
               ],
             );

@@ -7,15 +7,21 @@ import 'package:quiosque/app/core/ui/widgets/delivery_button.dart';
 import 'package:quiosque/app/models/payment_type_model.dart';
 import 'package:quiosque/app/pages/order/order_controller.dart';
 import 'package:quiosque/app/pages/order/order_state.dart';
-import 'package:quiosque/app/pages/order/widget/order_field.dart';
 import 'package:quiosque/app/pages/order/widget/order_product_tile.dart';
 import 'package:quiosque/app/pages/order/widget/payment_types_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:validatorless/validatorless.dart';
 
 class OrderPage extends StatefulWidget {
-  const OrderPage({super.key});
+  final String estabelecimento;
+  final String local;
+  final List<OrderProductDto> bag;
+
+  const OrderPage(
+      {super.key,
+      required this.estabelecimento,
+      required this.local,
+      required this.bag});
 
   @override
   State<OrderPage> createState() => _OrderPageState();
@@ -30,8 +36,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
 
   @override
   void onReady() {
-    final products =
-        ModalRoute.of(context)!.settings.arguments as List<OrderProductDto>;
+    final products = widget.bag;
     controller.load(products);
   }
 
@@ -187,25 +192,36 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                       const Divider(
                         color: Colors.grey,
                       ),
-                      OrderField(
-                        title: 'Endereço de Entrega',
-                        controller: addressEC,
-                        validator:
-                            Validatorless.required('Endereço Obrigatório'),
-                        hintText: 'Digite um endereço de entrega',
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Estabelecimento: ${widget.estabelecimento} ',
+                              style: context.textStyles.textRegular.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Local: ${widget.local}',
+                              style: context.textStyles.textRegular.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
-                      ),
-                      OrderField(
-                        title: 'CPF',
-                        controller: documentEC,
-                        validator:
-                            Validatorless.required('Documento CPF obrigatório'),
-                        hintText: 'Digite o CPF',
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                       BlocSelector<OrderController, OrderState,
                           List<PaymentTypeModel>>(

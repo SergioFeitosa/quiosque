@@ -24,6 +24,8 @@ class HomeRouter {
               as Map<String, dynamic>;
 
           return HomePage(
+            estabelecimento: args['estabelecimento'],
+            local: args['local'],
             bag: args['bag'],
           );
         },
