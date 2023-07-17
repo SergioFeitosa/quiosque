@@ -1,6 +1,7 @@
 import 'package:quiosque/app/core/dto/order_product_dto.dart';
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_appbar.dart';
+import 'package:quiosque/app/core/ui/widgets/delivery_appbar_soft.dart';
 import 'package:quiosque/app/pages/categories/widgets/delivery_category_tile.dart';
 import 'package:quiosque/app/pages/home/home_controller.dart';
 import 'package:quiosque/app/pages/home/home_state.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: DeliveryAppbar(),
+        appBar: DeliveryAppbarSoft(),
         body: BlocConsumer<HomeController, HomeState>(
           listener: (context, state) {
             state.status.matchAny(
