@@ -10,7 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ShoppingBagHomeWidget extends StatelessWidget {
   final List<OrderProductDto> bag;
-  const ShoppingBagHomeWidget({super.key, required this.bag});
+  final String estabelecimento;
+  final String local;
+
+  const ShoppingBagHomeWidget({
+    super.key,
+    required this.bag,
+    required this.estabelecimento,
+    required this.local,
+  });
 
   Future<void> _goOrder(BuildContext context) async {
     final navigator = Navigator.of(context);
@@ -21,7 +29,14 @@ class ShoppingBagHomeWidget extends StatelessWidget {
 
       if (loginResult == null || loginResult == false) return;
     }
-    final updateBag = await navigator.pushNamed('/order', arguments: bag);
+    final updateBag = await navigator.pushNamed(
+      '/order',
+      arguments: {
+        'bag': bag,
+        'estabelecimento': estabelecimento,
+        'local': local,
+      },
+    );
     controller.updateBag(updateBag as List<OrderProductDto>);
   }
 

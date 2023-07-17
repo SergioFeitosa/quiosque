@@ -7,6 +7,7 @@ import 'package:quiosque/app/pages/home/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiosque/app/pages/products/widgets/shopping_bag_home_widget.dart';
+import 'package:quiosque/app/pages/products/widgets/shopping_bag_widget.dart';
 
 class HomePage extends StatefulWidget {
   final String estabelecimento;
@@ -69,7 +70,11 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                 ),
                 Visibility(
                   visible: widget.bag.isNotEmpty,
-                  child: ShoppingBagHomeWidget(bag: state.shoppingBag),
+                  child: ShoppingBagHomeWidget(
+                    bag: state.shoppingBag,
+                    estabelecimento: '001',
+                    local: 'gs001',
+                  ),
                 )
               ],
             );
