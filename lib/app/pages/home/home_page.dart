@@ -1,6 +1,5 @@
 import 'package:quiosque/app/core/dto/order_product_dto.dart';
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
-import 'package:quiosque/app/core/ui/widgets/delivery_appbar.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_appbar_soft.dart';
 import 'package:quiosque/app/pages/categories/widgets/delivery_category_tile.dart';
 import 'package:quiosque/app/pages/home/home_controller.dart';
@@ -8,12 +7,11 @@ import 'package:quiosque/app/pages/home/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiosque/app/pages/products/widgets/shopping_bag_home_widget.dart';
-import 'package:quiosque/app/pages/products/widgets/shopping_bag_widget.dart';
 
 class HomePage extends StatefulWidget {
+  final List<OrderProductDto> bag;
   final String estabelecimento;
   final String local;
-  final List<OrderProductDto> bag;
   const HomePage({
     Key? key,
     required this.bag,
@@ -65,6 +63,8 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                       return DeliveryCategoryTile(
                         category: category,
                         bag: widget.bag,
+                        estabelecimento: widget.estabelecimento,
+                        local: widget.local,
                       );
                     },
                   ),
@@ -73,8 +73,8 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                   visible: widget.bag.isNotEmpty,
                   child: ShoppingBagHomeWidget(
                     bag: state.shoppingBag,
-                    estabelecimento: '001',
-                    local: 'gs001',
+                    estabelecimento: widget.estabelecimento,
+                    local: widget.local,
                   ),
                 )
               ],

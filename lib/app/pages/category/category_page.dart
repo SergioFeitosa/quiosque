@@ -13,8 +13,16 @@ import 'package:quiosque/app/pages/products/widgets/shopping_bag_widget.dart';
 class CategoryPage extends StatefulWidget {
   final CategoryModel category;
   final List<OrderProductDto>? bag;
-  const CategoryPage({Key? key, required this.category, required this.bag})
-      : super(key: key);
+  final String estabelecimento;
+  final String local;
+
+  const CategoryPage({
+    Key? key,
+    required this.category,
+    required this.bag,
+    required this.estabelecimento,
+    required this.local,
+  }) : super(key: key);
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -39,8 +47,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
             onPressed: () async {
               await Navigator.of(context).pushNamed('/home', arguments: {
                 'bag': controller.getBag,
-                'estabelecimento': '001',
-                'local': 'gs001',
+                'estabelecimento': widget.estabelecimento,
+                'local': widget.local,
               });
             },
           ),
@@ -50,8 +58,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
               onTap: () async {
                 await Navigator.of(context).pushNamed('/home', arguments: {
                   'bag': controller.getBag,
-                  'estabelecimento': '001',
-                  'local': 'gs001',
+                  'estabelecimento': widget.estabelecimento,
+                  'local': widget.local,
                 });
               },
               child: Image.asset(
@@ -108,8 +116,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
                   visible: state.shoppingBag.isNotEmpty,
                   child: ShoppingBagWidget(
                     bag: state.shoppingBag,
-                    estabelecimento: '001',
-                    local: 'gs001',
+                    estabelecimento: widget.estabelecimento,
+                    local: widget.local,
                   ),
                 )
               ],

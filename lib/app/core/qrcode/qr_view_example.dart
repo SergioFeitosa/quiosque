@@ -115,9 +115,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                             Navigator.of(context)
                                 .popAndPushNamed('/home', arguments: {
                               'bag': bag,
-                              'estabelecimento': '001',
+                              'estabelecimento': '002',
                               //result!.code.toString().substring(9, 11),
-                              'local': 'gs001',
+                              'local': 'gs003',
                               //result!.code.toString().substring(19, 24),
                             });
                           },

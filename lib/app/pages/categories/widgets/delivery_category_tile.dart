@@ -8,10 +8,15 @@ import 'package:quiosque/app/pages/home/home_controller.dart';
 class DeliveryCategoryTile extends StatelessWidget {
   final CategoryModel category;
   final List<OrderProductDto>? bag;
+  final String estabelecimento;
+  final String local;
+
   const DeliveryCategoryTile({
     super.key,
     required this.category,
     required this.bag,
+    required this.estabelecimento,
+    required this.local,
   });
 
   @override
@@ -19,9 +24,13 @@ class DeliveryCategoryTile extends StatelessWidget {
     return InkWell(
       onTap: () async {
         final controller = context.read<HomeController>();
-        final orderProductResult = await Navigator.of(context).pushNamed(
-            '/category',
-            arguments: {'category': category, 'bag': bag});
+        final orderProductResult =
+            await Navigator.of(context).pushNamed('/category', arguments: {
+          'category': category,
+          'bag': bag,
+          'estabelecimento': estabelecimento,
+          'local': local,
+        });
         if (orderProductResult != null) {
           controller.addOrUpdateBag(orderProductResult as OrderProductDto);
         }

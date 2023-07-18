@@ -2,7 +2,6 @@ import 'package:quiosque/app/core/dto/order_product_dto.dart';
 import 'package:quiosque/app/core/extensions/formatter_extensions.dart';
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
 import 'package:quiosque/app/core/ui/styles/text_styles.dart';
-import 'package:quiosque/app/core/ui/widgets/delivery_appbar.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_button.dart';
 import 'package:quiosque/app/models/payment_type_model.dart';
 import 'package:quiosque/app/pages/order/order_controller.dart';
@@ -110,7 +109,37 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
           return false;
         },
         child: Scaffold(
-          appBar: DeliveryAppbar(),
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () async {
+                await Navigator.of(context).pushNamed('/home', arguments: {
+                  'bag': widget.bag,
+                  'estabelecimento': '001',
+                  'local': 'gs001',
+                });
+              },
+            ),
+            title: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () async {
+                  await Navigator.of(context).pushNamed('/home', arguments: {
+                    'bag': widget.bag,
+                    'estabelecimento': '001',
+                    'local': 'gs001',
+                  });
+                },
+                child: Image.asset(
+                  "assets/images/chapeudecouro02.png",
+                  width: 100,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            centerTitle: true,
+          ),
           body: Form(
             key: formKey,
             child: CustomScrollView(
@@ -265,8 +294,8 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                             paymentTypeValid.value = paymentTypeSelected;
                             if (valid && paymentTypeSelected) {
                               controller.saveOrder(
-                                  address: addressEC.text,
-                                  document: documentEC.text,
+                                  address: widget.estabelecimento,
+                                  document: widget.local,
                                   paymentTypeId: paymentTypeId!);
                             }
                           },

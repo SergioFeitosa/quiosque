@@ -26,6 +26,8 @@ class CategoryRouter {
             return CategoryPage(
               category: args['category'],
               bag: args['bag'],
+              estabelecimento: args['estabelecimento'],
+              local: args['local'],
             );
           });
 }
