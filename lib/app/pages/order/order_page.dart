@@ -117,8 +117,8 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
               onPressed: () async {
                 await Navigator.of(context).pushNamed('/home', arguments: {
                   'bag': widget.bag,
-                  'estabelecimento': '001',
-                  'local': 'gs001',
+                  'estabelecimento': widget.estabelecimento,
+                  'local': widget.local,
                 });
               },
             ),
@@ -128,8 +128,8 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                 onTap: () async {
                   await Navigator.of(context).pushNamed('/home', arguments: {
                     'bag': widget.bag,
-                    'estabelecimento': '001',
-                    'local': 'gs001',
+                    'estabelecimento': widget.estabelecimento,
+                    'local': widget.local,
                   });
                 },
                 child: Image.asset(
@@ -294,8 +294,8 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                                 await Navigator.of(context)
                                     .pushNamed('/home', arguments: {
                                   'bag': widget.bag,
-                                  'estabelecimento': '001',
-                                  'local': 'gs001',
+                                  'estabelecimento': widget.estabelecimento,
+                                  'local': widget.local,
                                 });
                               },
                               label: 'Continuar comprando',

@@ -1,4 +1,3 @@
-import 'package:quiosque/app/core/dto/order_product_dto.dart';
 import 'package:quiosque/app/core/qrcode/qr_view_example.dart';
 import 'package:quiosque/app/core/ui/helpers/size_extensions.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_button.dart';
@@ -9,7 +8,6 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<OrderProductDto> bag = [];
     return Scaffold(
       body: ColoredBox(
         color: const Color(0XFF140E0E),
@@ -34,22 +32,12 @@ class SplashPage extends StatelessWidget {
                     width: context.percentWidth(.6),
                     height: 35,
                     label: 'ACESSAR',
-                    onPressed: () {
-                      //  Navigator.of(context).popAndPushNamed('/home');
-                      Navigator.of(context).pushNamed('/home', arguments: {
-                        'bag': bag,
-                        'estabelecimento': '001',
-                        'local': 'gs001',
-                      });
-                    },
-                  ),
-                  ElevatedButton(
+                    //  Navigator.of(context).popAndPushNamed('/home');
                     onPressed: () async {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const QRViewExample(),
                       ));
                     },
-                    child: const Text('qrView'),
                   ),
                 ],
               ),

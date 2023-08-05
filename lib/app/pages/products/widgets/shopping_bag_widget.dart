@@ -28,8 +28,6 @@ class ShoppingBagWidget extends StatelessWidget {
 
       if (loginResult == null || loginResult == false) return;
     }
-    //var estabelecimento = '001';
-    //var local = 'GS001';
 
     final updateBag = await navigator.pushNamed('/order', arguments: {
       'bag': bag,
