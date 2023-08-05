@@ -1,6 +1,7 @@
 import 'package:quiosque/app/core/dto/order_product_dto.dart';
 import 'package:quiosque/app/core/extensions/formatter_extensions.dart';
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
+import 'package:quiosque/app/core/ui/helpers/size_extensions.dart';
 import 'package:quiosque/app/core/ui/styles/text_styles.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_button.dart';
 import 'package:quiosque/app/models/payment_type_model.dart';
@@ -282,25 +283,46 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                       const Divider(
                         color: Colors.black,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: DeliveryButton(
-                          width: double.infinity,
-                          height: 48,
-                          onPressed: () {
-                            final valid =
-                                formKey.currentState?.validate() ?? false;
-                            final paymentTypeSelected = paymentTypeId != null;
-                            paymentTypeValid.value = paymentTypeSelected;
-                            if (valid && paymentTypeSelected) {
-                              controller.saveOrder(
-                                  address: widget.estabelecimento,
-                                  document: widget.local,
-                                  paymentTypeId: paymentTypeId!);
-                            }
-                          },
-                          label: 'FINALIZAR',
-                        ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: DeliveryButton(
+                              width: context.percentWidth(.425),
+                              height: 68,
+                              onPressed: () async {
+                                await Navigator.of(context)
+                                    .pushNamed('/home', arguments: {
+                                  'bag': widget.bag,
+                                  'estabelecimento': '001',
+                                  'local': 'gs001',
+                                });
+                              },
+                              label: 'Continuar comprando',
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: DeliveryButton(
+                              width: context.percentWidth(.425),
+                              height: 68,
+                              onPressed: () {
+                                final valid =
+                                    formKey.currentState?.validate() ?? false;
+                                final paymentTypeSelected =
+                                    paymentTypeId != null;
+                                paymentTypeValid.value = paymentTypeSelected;
+                                if (valid && paymentTypeSelected) {
+                                  controller.saveOrder(
+                                      address: widget.estabelecimento,
+                                      document: widget.local,
+                                      paymentTypeId: paymentTypeId!);
+                                }
+                              },
+                              label: 'FINALIZAR',
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
