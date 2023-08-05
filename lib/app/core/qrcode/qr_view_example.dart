@@ -33,8 +33,6 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   @override
   Widget build(BuildContext context) {
-    final List<OrderProductDto> bag = [];
-
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -47,29 +45,10 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                    const Text('Scan a code'),
-                  if (result != null)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                              onPressed: () async {
-                                await controller?.toggleFlash();
-                                setState(() {});
-                              },
-                              child: FutureBuilder(
-                                future: controller?.getFlashStatus(),
-                                builder: (context, snapshot) {
-                                  return Text('Flash: ${snapshot.data}');
-                                },
-                              )),
-                        ),
                         Container(
                           margin: const EdgeInsets.all(8),
                           child: ElevatedButton(
@@ -101,7 +80,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                           onPressed: () async {
                             await controller?.pauseCamera();
                           },
-                          child: const Text('pause',
+                          child: const Text('Aponte para o QRCode',
                               style: TextStyle(fontSize: 20)),
                         ),
                       ),
@@ -112,17 +91,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                             width: context.percentWidth(.6),
                             height: 35,
                             label: 'ACESSAR',
-                            onPressed: () {
-                              //  Navigator.of(context).popAndPushNamed('/home');
-                              Navigator.of(context)
-                                  .popAndPushNamed('/home', arguments: {
-                                'bag': bag,
-                                'estabelecimento': 'est001',
-                                //    result!.code.toString().substring(9, 11),
-                                'local': 'mesa001',
-                                //    result!.code.toString().substring(19, 24),
-                              });
-                            },
+                            onPressed: () {},
                           ),
                         )
                     ],
@@ -158,12 +127,21 @@ class _QRViewExampleState extends State<QRViewExample> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
+    final List<OrderProductDto> bag = [];
+
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+      });
+      Navigator.of(context).popAndPushNamed('/home', arguments: {
+        'bag': bag,
+        'estabelecimento': 'est001',
+        //    result!.code.toString().substring(9, 11),
+        'local': 'mesa001',
+        //    result!.code.toString().substring(19, 24),
       });
     });
   }
