@@ -34,7 +34,7 @@ class CategoryController extends Cubit<CategoryState> {
     final shoppingBag = [...state.shoppingBag];
 
     final orderIndex = shoppingBag
-        .indexWhere((orderP) => orderP.product == orderProduct.product);
+        .indexWhere((orderP) => orderP.product.id == orderProduct.product.id);
 
     if (orderIndex > -1) {
       if (orderProduct.amount == 0) {

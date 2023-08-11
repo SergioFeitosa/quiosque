@@ -138,10 +138,10 @@ class _QRViewExampleState extends State<QRViewExample> {
       });
       Navigator.of(context).popAndPushNamed('/home', arguments: {
         'bag': bag,
-        'estabelecimento': 'est001',
-        //    result!.code.toString().substring(9, 11),
-        'local': 'mesa001',
-        //    result!.code.toString().substring(19, 24),
+        'estabelecimento': result!.code.toString().substring(16, 23),
+        //    result!.code.toString().substring(9, 12), estabecimento: 001
+        'local': result!.code.toString().substring(29, 38),
+        //    result!.code.toString().substring(19, 25), local: mesa001
       });
     });
   }

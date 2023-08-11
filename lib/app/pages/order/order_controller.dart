@@ -72,6 +72,29 @@ class OrderController extends Cubit<OrderState> {
         state.copyWith(orderProducts: orders, status: OrderStatus.updateOrder));
   }
 
+  void addOrUpdateOrder(OrderProductDto orderProduct) {
+    final shoppingOrder = [...state.orderProducts];
+
+    final orderIndex = shoppingOrder
+        .indexWhere((orderP) => orderP.product.id == orderProduct.product.id);
+
+    if (orderIndex > -1) {
+      if (orderProduct.amount == 0) {
+        shoppingOrder.removeAt(orderIndex);
+      } else {
+        shoppingOrder[orderIndex] = orderProduct;
+      }
+    } else {
+      shoppingOrder.add(orderProduct);
+    }
+
+    emit(state.copyWith(orderProducts: shoppingOrder));
+  }
+
+  void updateOrder(List<OrderProductDto> updateOrder) {
+    emit(state.copyWith(orderProducts: updateOrder));
+  }
+
   void cancelDeleteProcess() {
     emit(state.copyWith(status: OrderStatus.loaded));
   }

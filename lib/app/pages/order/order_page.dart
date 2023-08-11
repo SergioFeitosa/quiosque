@@ -94,6 +94,10 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                 _showConfirmProductDialog(state);
               }
             },
+            updateOrder: () {
+              hideLoader();
+              controller.updateOrder(state.orderProducts);
+            },
             emptyBag: () {
               showInfo('Sua sacola está vazia, Selecione um produto ou mais');
               Navigator.pop(context, <OrderProductDto>[]);
