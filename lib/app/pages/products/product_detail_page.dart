@@ -26,7 +26,9 @@ class _ProductDetailPageState
   @override
   void initState() {
     super.initState();
-    final amount = widget.order?.amount ?? 1;
+    final pedido = widget.product.id == widget.order?.product.id;
+
+    final amount = pedido ? widget.order?.amount ?? 1 : 1;
     controller.initial(amount, widget.order != null);
   }
 
