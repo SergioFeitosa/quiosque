@@ -96,7 +96,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
             },
             updateOrder: () {
               hideLoader();
-              controller.updateOrder(state.orderProducts);
+              controller.addOrUpdateOrder(state.orderProducts.first);
             },
             emptyBag: () {
               showInfo('Sua sacola está vazia, Selecione um produto ou mais');
@@ -120,7 +120,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () async {
                 await Navigator.of(context).pushNamed('/home', arguments: {
-                  'bag': widget.bag,
+                  'bag': controller.state.orderProducts,
                   'estabelecimento': widget.estabelecimento,
                   'local': widget.local,
                 });
@@ -131,7 +131,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
               child: GestureDetector(
                 onTap: () async {
                   await Navigator.of(context).pushNamed('/home', arguments: {
-                    'bag': widget.bag,
+                    'bag': controller.state.orderProducts,
                     'estabelecimento': widget.estabelecimento,
                     'local': widget.local,
                   });
@@ -295,12 +295,8 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                               width: context.percentWidth(.425),
                               height: 68,
                               onPressed: () async {
-                                await Navigator.of(context)
-                                    .pushNamed('/home', arguments: {
-                                  'bag': widget.bag,
-                                  'estabelecimento': widget.estabelecimento,
-                                  'local': widget.local,
-                                });
+                                Navigator.of(context)
+                                    .pop(controller.state.orderProducts);
                               },
                               label: 'Continuar comprando',
                             ),
