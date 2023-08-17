@@ -27,7 +27,7 @@ class DeliveryCategoryTile extends StatelessWidget {
         final orderProductResult =
             await Navigator.of(context).pushNamed('/category', arguments: {
           'category': category,
-          'bag': bag,
+          'bag': controller.state.shoppingBag,
           'estabelecimento': estabelecimento,
           'local': local,
         });

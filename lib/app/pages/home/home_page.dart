@@ -1,4 +1,5 @@
 import 'package:quiosque/app/core/dto/order_product_dto.dart';
+import 'package:quiosque/app/core/qrcode/qr_view_example.dart';
 import 'package:quiosque/app/core/ui/base_state/base_state.dart';
 import 'package:quiosque/app/core/ui/widgets/delivery_appbar_soft.dart';
 import 'package:quiosque/app/pages/categories/widgets/delivery_category_tile.dart';
@@ -35,7 +36,16 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        controller.state.shoppingBag.isEmpty
+            ? Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const QRViewExample(),
+              ))
+            : null;
+        return false;
+      },
+      child: Scaffold(
         appBar: DeliveryAppbarSoft(),
         body: BlocConsumer<HomeController, HomeState>(
           listener: (context, state) {
@@ -57,12 +67,12 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: state.categories.length,
+                    itemCount: controller.state.categories.length,
                     itemBuilder: (context, index) {
                       final category = state.categories[index];
                       return DeliveryCategoryTile(
                         category: category,
-                        bag: widget.bag,
+                        bag: controller.state.shoppingBag,
                         estabelecimento: widget.estabelecimento,
                         local: widget.local,
                       );
@@ -70,9 +80,9 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                   ),
                 ),
                 Visibility(
-                  visible: widget.bag.isNotEmpty,
+                  visible: controller.state.shoppingBag.isNotEmpty,
                   child: ShoppingBagHomeWidget(
-                    bag: state.shoppingBag,
+                    bag: controller.state.shoppingBag,
                     estabelecimento: widget.estabelecimento,
                     local: widget.local,
                   ),
@@ -80,6 +90,8 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
               ],
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 }

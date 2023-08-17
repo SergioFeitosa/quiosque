@@ -297,7 +297,6 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                               onPressed: () async {
                                 Navigator.of(context)
                                     .pop(controller.state.orderProducts);
-                                return;
                               },
                               label: 'Continuar comprando',
                             ),

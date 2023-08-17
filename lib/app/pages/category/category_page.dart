@@ -39,14 +39,24 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        //Navigator.of(context).pop(controller.state.shoppingBag);
+        Navigator.of(context).pushNamed('/home', arguments: {
+          'bag': controller.state.shoppingBag,
+          'estabelecimento': widget.estabelecimento,
+          'local': widget.local,
+        });
+        return false;
+      },
+      child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () async {
               await Navigator.of(context).pushNamed('/home', arguments: {
-                'bag': controller.getBag,
+                'bag': controller.state.shoppingBag,
                 'estabelecimento': widget.estabelecimento,
                 'local': widget.local,
               });
@@ -115,7 +125,7 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
                 Visibility(
                   visible: state.shoppingBag.isNotEmpty,
                   child: ShoppingBagWidget(
-                    bag: state.shoppingBag,
+                    bag: controller.state.shoppingBag,
                     estabelecimento: widget.estabelecimento,
                     local: widget.local,
                   ),
@@ -123,6 +133,8 @@ class _CategoryPageState extends BaseState<CategoryPage, CategoryController> {
               ],
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 }
