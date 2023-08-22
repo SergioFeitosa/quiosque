@@ -53,8 +53,9 @@ dependencies:
   flutter_awesome_select: ^6.5.0
   flutter_secure_storage: ^8.0.0
   qr_code_scanner: ^1.0.1
-
-
+  flutter_credit_card: ^3.0.7
+  app_color: ^0.0.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -81,7 +82,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/creditCard/
     - .env
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

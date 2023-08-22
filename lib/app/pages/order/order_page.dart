@@ -257,6 +257,12 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                       const SizedBox(
                         height: 10,
                       ),
+                      const Divider(
+                        color: Colors.black,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       BlocSelector<OrderController, OrderState,
                           List<PaymentTypeModel>>(
                         selector: (state) => state.paymentTypes,
@@ -313,10 +319,38 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                                     paymentTypeId != null;
                                 paymentTypeValid.value = paymentTypeSelected;
                                 if (valid && paymentTypeSelected) {
-                                  controller.saveOrder(
-                                      address: widget.estabelecimento,
-                                      document: widget.local,
-                                      paymentTypeId: paymentTypeId!);
+                                  // controller.saveOrder(
+                                  //     address: widget.estabelecimento,
+                                  //     document: widget.local,
+                                  //     paymentTypeId: paymentTypeId!);
+
+                                  switch (paymentTypeId) {
+                                    case 1:
+                                      Navigator.of(context).pushNamed(
+                                          '/quiosqueCreditCard',
+                                          arguments: {
+                                            'bag':
+                                                controller.state.orderProducts,
+                                            'estabelecimento':
+                                                widget.estabelecimento,
+                                            'local': widget.local,
+                                          });
+                                      break;
+                                    case 2:
+                                      Navigator.of(context).pushNamed(
+                                          '/quiosqueCreditCard',
+                                          arguments: {
+                                            'bag':
+                                                controller.state.orderProducts,
+                                            'estabelecimento':
+                                                widget.estabelecimento,
+                                            'local': widget.local,
+                                          });
+                                      break;
+                                    default:
+                                  }
+
+                                  if (paymentTypeId == 1) {}
                                 }
                               },
                               label: 'FINALIZAR',

@@ -5,6 +5,7 @@ import 'package:quiosque/app/core/ui/theme/theme_config.dart';
 import 'package:quiosque/app/pages/auth/login/login_router.dart';
 import 'package:quiosque/app/pages/auth/register/register_router.dart';
 import 'package:quiosque/app/pages/category/category_router.dart';
+import 'package:quiosque/app/pages/credit_card/quiosque_credit_card_page.dart';
 import 'package:quiosque/app/pages/home/home_router.dart';
 import 'package:quiosque/app/pages/order/order_completed_page.dart';
 import 'package:quiosque/app/pages/order/widget/order_router.dart';
@@ -34,6 +35,7 @@ class Quiosque extends StatelessWidget {
           '/order/completed': (context) => const OrderCompletedPage(),
           '/productDetail': (context) => ProductDetailRouter.page,
           '/category': (context) => CategoryRouter.page,
+          '/quiosqueCreditCard': (context) => const QuiosqueCreditCardPage(),
         },
       ),
     );
